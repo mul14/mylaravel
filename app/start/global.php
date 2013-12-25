@@ -89,12 +89,12 @@ require app_path().'/filters.php';
 
 /*
 |--------------------------------------------------------------------------
-| Require The Observers File
+| Require The Event Handlers File
 |--------------------------------------------------------------------------
 |
 */
 
-require app_path().'/observers.php';
+require app_path().'/events.php';
 
 /*
 |--------------------------------------------------------------------------
