@@ -24,11 +24,21 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment(function () {
 
-	'local' => array('localhost', '127.0.0.1', '0.0.0.0'),
+    $envName = 'APP_ENV';
 
-));
+    $hostname = array('localhost', '127.0.0.1', '0.0.0.0', '::1', '::');
+
+    if (getenv($envName)) {
+        return getenv($envName);
+    }
+    elseif (in_array($_SERVER['SERVER_NAME'], $hostname) || php_sapi_name() == 'cli-server') {
+        return 'local';
+    }
+
+    return 'production';
+});
 
 /*
 |--------------------------------------------------------------------------
